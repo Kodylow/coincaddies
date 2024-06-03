@@ -1,5 +1,1 @@
-{ pkgs }: {
-  deps = [
-    pkgs.vim
-  ];
-}
+{ pkgs }: { deps = [ pkgs.vim ]; }
