@@ -25,7 +25,7 @@ new Elysia()
         task: t.String(),
         resources: t.String(),
         nwcString: t.String(),
-        budget: t.Float(),
+        budget: t.Number(),
       }),
     }
   )
