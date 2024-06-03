@@ -18,19 +18,12 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    fedimint = {
-      url =
-        "github:fedimint/fedimint?rev=dbabb5f44de5401d24ca9414534a36a22e89c6df";
-    };
   };
 
-  outputs = { self, nixpkgs, flakebox, fenix, flake-utils, fedimint }:
+  outputs = { self, nixpkgs, flakebox, fenix, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = fedimint.overlays.fedimint;
-        };
+        pkgs = import nixpkgs { inherit system; };
         lib = pkgs.lib;
         flakeboxLib = flakebox.lib.${system} { };
         rustSrc = flakeboxLib.filterSubPaths {
@@ -104,20 +97,8 @@
         devShells = flakeboxLib.mkShells {
           packages = [ ];
           buildInputs = commonArgs.buildInputs;
-          nativeBuildInputs = [
-            pkgs.mprocs
-            pkgs.go
-            pkgs.bun
-            pkgs.bitcoind
-            pkgs.clightning
-            pkgs.lnd
-            pkgs.esplora-electrs
-            pkgs.electrs
-            commonArgs.nativeBuildInputs
-            fedimint.packages.${system}.devimint
-            fedimint.packages.${system}.gateway-pkgs
-            fedimint.packages.${system}.fedimint-pkgs
-          ];
+          nativeBuildInputs =
+            [ pkgs.mprocs pkgs.just pkgs.bun commonArgs.nativeBuildInputs ];
           shellHook = ''
             export RUSTFLAGS="--cfg tokio_unstable"
             export RUSTDOCFLAGS="--cfg tokio_unstable"
