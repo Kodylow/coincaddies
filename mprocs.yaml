@@ -3,8 +3,11 @@ procs:
     shell: zsh # if on macOS
     # shell: bash # if on Linux
     stop: SIGKILL
-  fedimint-clientd:
-    shell: cargo run --manifest-path fedimint-clientd/Cargo.toml
+  coincaddies:
+    shell: cargo run
+    stop: SIGTERM
+  agents-server:
+    shell: cd agents-server && bun run dev
     stop: SIGTERM
   ngrok:
     shell: ngrok http http://localhost:3333
