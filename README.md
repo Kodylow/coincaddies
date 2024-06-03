@@ -1,3 +1,5 @@
+![alt text](image.png)
+
 # CoinCaddies: Agent Workflows with Bitcoin Budgets
 
 ## Structure:
