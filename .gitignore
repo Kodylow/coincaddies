@@ -1,0 +1,11 @@
+/target
+/target-nix
+/.direnv
+.env
+fm_client_db
+.cargo
+.vscode
+.DS_Store
+work_dir
+result
+/vendor
